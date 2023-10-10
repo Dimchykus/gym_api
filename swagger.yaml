@@ -69,7 +69,7 @@ paths:
               specialty: "Fitness"
             - name: "Trainer 2"
               specialty: "Yoga"
- /mySessions:
+  /mySessions:
     get:
       security:
         - Authorization: []
