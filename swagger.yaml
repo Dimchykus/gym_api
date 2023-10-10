@@ -14,10 +14,10 @@ info:
   license:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
-host: "petstore.swagger.io"
+host: "https://dimchykus.github.io/gym_api"
 basePath: "/v2"
 tags:
-  - name: "pet"
+  - name: "visitor"
     description: "Everything about your Pets"
     externalDocs:
       description: "Find out more"
@@ -35,6 +35,8 @@ schemes:
 paths:
   /myTrainers:
     get:
+      tags:
+        - "visitor"
       security:
         - Authorization: []
       summary: Get trainers associated with the authenticated visitor
@@ -90,6 +92,8 @@ paths:
               specialty: "Yoga"
   /mySessions:
     get:
+      tags:
+        - "visitor"
       security:
         - Authorization: []
       summary: Get sessions booked by the authenticated visitor
@@ -137,6 +141,8 @@ paths:
               trainer: "Trainer 2"
   /book/{sessionId}:
     post:
+      tags:
+        - "visitor"
       security:
         - Authorization: []
       summary: Book a session
