@@ -4,7 +4,7 @@
     "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
     "title": "Swagger Petstore"
   },
-  "host": "https://1dee-213-109-80-222.ngrok-free.app/",
+  "host": "1dee-213-109-80-222.ngrok-free.app/",
   "tags": [
     {
       "name": "visitor",
@@ -29,6 +29,75 @@
   ],
   "schemes": ["https", "http"],
   "paths": {
+    "paths": {
+      "/login": {
+        "post": {
+          "summary": "User Login",
+          "description": "Authenticate a user and generate a JWT token for login.",
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "description": "User's username"
+                    },
+                    "password": {
+                      "type": "string",
+                      "description": "User's password"
+                    }
+                  },
+                  "required": ["username", "password"]
+                }
+              }
+            },
+            "required": true
+          },
+          "responses": {
+            "200": {
+              "description": "Successful login",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "token": "your-jwt-token"
+                  },
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "token": {
+                        "type": "string",
+                        "description": "JWT token for authentication"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "401": {
+              "description": "Unauthorized",
+              "content": {
+                "application/json": {
+                  "example": {
+                    "message": "Invalid username or password"
+                  },
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "message": {
+                        "type": "string",
+                        "description": "Error message"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/myTrainers": {
       "get": {
         "security": [
@@ -195,73 +264,6 @@
                 "trainer": "Trainer 2"
               }
             ]
-          }
-        }
-      }
-    },
-    "/login": {
-      "post": {
-        "summary": "Authenticate a user and generate a token",
-        "description": "Authenticate a user based on their username and password and generate a token for access.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "username": {
-                    "type": "string",
-                    "description": "The username of the user."
-                  },
-                  "password": {
-                    "type": "string",
-                    "description": "The password of the user."
-                  }
-                },
-                "required": ["username", "password"]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Successfully authenticated and generated a token.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "token": {
-                      "type": "string",
-                      "description": "The authentication token for the user."
-                    }
-                  }
-                },
-                "example": {
-                  "token": "your_generated_token_here"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Invalid username or password.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "message": {
-                      "type": "string",
-                      "description": "Error message indicating the login failure."
-                    }
-                  }
-                },
-                "example": {
-                  "message": "Invalid username or password"
-                }
-              }
-            }
           }
         }
       }

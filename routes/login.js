@@ -9,54 +9,6 @@ const manager = require("../models/manager");
 
 const router = express.Router();
 
-/**
- * @swagger
- * /login:
- *   post:
- *     summary: Authenticate a user and generate a token
- *     description: Authenticate a user based on their username and password and generate a token for access.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               username:
- *                 type: string
- *                 description: The username of the user.
- *               password:
- *                 type: string
- *                 description: The password of the user.
- *             required:
- *               - username
- *               - password
- *     responses:
- *       200:
- *         description: Successfully authenticated and generated a token.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *                   description: The authentication token for the user.
- *             example:
- *               token: "your_generated_token_here"
- *       401:
- *         description: Invalid username or password.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Error message indicating the login failure.
- *             example:
- *               message: "Invalid username or password"
- */
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
 
@@ -95,75 +47,6 @@ router.post("/login", async (req, res) => {
   res.json({ token });
 });
 
-/**
- * @swagger
- * /register:
- *   post:
- *     summary: Register a new user
- *     description: Register a new user with a unique username and generate a token.
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               username:
- *                 type: string
- *                 description: The username of the new user (must be unique).
- *               password:
- *                 type: string
- *                 description: The password for the new user.
- *               name:
- *                 type: string
- *                 description: The name of the new user.
- *               email:
- *                 type: string
- *                 format: email
- *                 description: The email address of the new user.
- *             required:
- *               - username
- *               - password
- *               - name
- *               - email
- *     responses:
- *       200:
- *         description: Successfully registered and generated a token.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 token:
- *                   type: string
- *                   description: The authentication token for the new user.
- *             example:
- *               token: "your_generated_token_here"
- *       400:
- *         description: Username already exists.
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                 message:
- *                   type: string
- *                   description: Error message indicating that the username already exists.
- *             example:
- *               message: "Username already exists"
- *     examples:
- *       RequestExample:
- *         summary: Example request for user registration
- *         value:
- *           username: "new_user"
- *           password: "password123"
- *           name: "John Doe"
- *           email: "john.doe@example.com"
- *       ResponseExample:
- *         summary: Example response for successful user registration
- *         value:
- *           token: "your_generated_token_here"
- */
 router.post("/register", async (req, res) => {
   const { username, password, name, email } = req.body;
 
