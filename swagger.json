@@ -1,0 +1,217 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "This is a sample server Petstore server.  You can find out more about Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).  For this sample, you can use the api key `special-key` to test the authorization filters.",
+    "version": "1.0.5",
+    "title": "Swagger Petstore",
+    "termsOfService": "http://swagger.io/terms/",
+    "contact": {
+      "email": "apiteam@swagger.io"
+    },
+    "license": {
+      "name": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "host": "https://dimchykus.github.io/gym_api",
+  "basePath": "/v2",
+  "tags": [
+    {
+      "name": "visitor",
+      "description": "Everything about your Pets",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    },
+    {
+      "name": "manager",
+      "description": "Access to Petstore orders"
+    },
+    {
+      "name": "auth",
+      "description": "Operations about user",
+      "externalDocs": {
+        "description": "Find out more about our store",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "schemes": ["https", "http"],
+  "paths": {
+    "/myTrainers": {
+      "get": {
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "summary": "Get trainers associated with the authenticated visitor",
+        "description": "Retrieve the trainers associated with the sessions booked by the authenticated visitor.",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of trainers.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Trainer"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request or visitor not booked with any sessions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message indicating the reason."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Visitor not found.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message indicating the reason."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message indicating the server error."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "examples": {
+          "RequestExample": {
+            "summary": "Example request for retrieving trainers"
+          },
+          "ResponseExample": {
+            "summary": "Example response for retrieving trainers",
+            "value": [
+              {
+                "name": "Trainer 1",
+                "specialty": "Fitness"
+              },
+              {
+                "name": "Trainer 2",
+                "specialty": "Yoga"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "/mySessions": {
+      "get": {
+        "security": [
+          {
+            "Authorization": []
+          }
+        ],
+        "summary": "Get sessions booked by the authenticated visitor",
+        "description": "Retrieve the sessions booked by the authenticated visitor.",
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of sessions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Session"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request or visitor has not booked any sessions.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message indicating the reason."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string",
+                      "description": "Error message indicating the server error."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "examples": {
+          "RequestExample": {
+            "summary": "Example request for retrieving sessions"
+          },
+          "ResponseExample": {
+            "summary": "Example response for retrieving sessions",
+            "value": [
+              {
+                "date": "2023-10-10",
+                "time": "10:00 AM",
+                "trainer": "Trainer 1"
+              },
+              {
+                "date": "2023-10-11",
+                "time": "3:00 PM",
+                "trainer": "Trainer 2"
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  }
+}
