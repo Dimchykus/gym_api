@@ -8,7 +8,7 @@ info:
     \ filters."
   version: "1.0.5"
   title: "Swagger Petstore"
-host: "petstore.swagger.io"
+host: "89d0-213-109-80-222.ngrok-free.app/"
 basePath: "/v2"
 schemes:
   - "https"
@@ -78,6 +78,273 @@ paths:
             properties:
               message:
                 type: "string"
+  /myTrainers:
+    get:
+      tags:
+        - "user"
+      summary: "Get My Trainers"
+      operationId: "getMyTrainers"
+      security:
+        - user_auth: [] # Assuming there is a user authentication mechanism
+      responses:
+        200:
+          description: "List of trainers associated with the user's sessions"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Trainer"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        404:
+          description: "Visitor not found"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /mySessions:
+    get:
+      tags:
+        - "user"
+      summary: "Get My Sessions"
+      description: "Retrieve the sessions booked by the authenticated user."
+      operationId: "getMySessions"
+      security:
+        - user_auth: [] # Assuming there is a user authentication mechanism
+      responses:
+        200:
+          description: "List of sessions booked by the user"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Session"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /book/{sessionId}:
+    post:
+      tags:
+        - "user"
+      summary: "Book a Session"
+      description: "Book a session by providing the session ID."
+      operationId: "bookSession"
+      security:
+        - user_auth: [] # Assuming there is a user authentication mechanism
+      parameters:
+        - name: "sessionId"
+          in: "path"
+          description: "ID of the session to book."
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Session booked successfully"
+          schema:
+            $ref: "#/definitions/Session"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        404:
+          description: "Session not found"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /unbook/{sessionId}:
+    delete:
+      tags:
+        - "user"
+      summary: "Unbook a Session"
+      description: "Unbook a session by providing the session ID."
+      operationId: "unbookSession"
+      security:
+        - user_auth: [] # Assuming there is a user authentication mechanism
+      parameters:
+        - name: "sessionId"
+          in: "path"
+          description: "ID of the session to unbook."
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Session unbooked successfully"
+          schema:
+            $ref: "#/definitions/Session"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        404:
+          description: "Session not found"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /sessions:
+    post:
+      tags:
+        - "user"
+      summary: "Create a Session"
+      description: "Create a session if the authenticated user is a trainer."
+      operationId: "createSession"
+      security:
+        - user_auth: [] # Assuming there is a user authentication mechanism
+      parameters:
+        - name: "SessionData"
+          in: "body"
+          description: "Data for creating a new session"
+          required: true
+          schema:
+            $ref: "#/definitions/CreateSessionData"
+      responses:
+        200:
+          description: "Session created successfully"
+          schema:
+            $ref: "#/definitions/Session"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        403:
+          description: "Forbidden"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /sessions/{sessionId}:
+    put:
+      tags:
+        - "user"
+      summary: "Update a Session"
+      description: "Update a session if the authenticated user is a trainer or manager."
+      operationId: "updateSession"
+      security:
+        - user_auth: [] # Assuming there is a user authentication mechanism
+      parameters:
+        - name: "sessionId"
+          in: "path"
+          description: "ID of the session to update."
+          required: true
+          type: "string"
+        - name: "SessionUpdateData"
+          in: "body"
+          description: "Data for updating the session"
+          required: true
+          schema:
+            $ref: "#/definitions/UpdateSessionData"
+      responses:
+        200:
+          description: "Session updated successfully"
+          schema:
+            $ref: "#/definitions/Session"
+        403:
+          description: "Forbidden"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        404:
+          description: "Session not found"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /visitors:
+    get:
+      tags:
+        - "user"
+      summary: "Get Visitors"
+      description: "Retrieve visitors if the authenticated user is a trainer or manager."
+      operationId: "getVisitors"
+      security:
+        - user_auth: [] # Assuming there is a user authentication mechanism
+      responses:
+        200:
+          description: "List of visitors associated with the user's sessions"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Visitor"
+        403:
+          description: "Forbidden"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
 definitions:
   RegistrationData:
     type: "object"
@@ -96,6 +363,35 @@ definitions:
       username:
         type: "string"
       password:
+        type: "string"
+  Trainer:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+      name:
+        type: "string"
+  Session:
+    type: "object"
+    properties:
+      _id:
+        type: "string"
+  CreateSessionData:
+    type: "object"
+    properties:
+      title:
+        type: "string"
+      description:
+        type: "string"
+      date:
+        type: "string"
+        format: "date-time"
+      maxVisitors:
+        type: "integer"
+  Visitor:
+    type: "object"
+    properties:
+      _id:
         type: "string"
 externalDocs:
   description: "Find out more about Swagger"
