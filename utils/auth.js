@@ -29,13 +29,15 @@ function verifyToken(token) {
 function authenticateUser(req, res, next) {
   const authHeader = req.headers.authorization;
 
-  if (!authHeader || !authHeader.startsWith("Bearer: ")) {
+  console.log("authHeader", authHeader);
+
+  if (!authHeader) {
     return res
       .status(401)
       .json({ message: "Missing or invalid authorization header" });
   }
 
-  const token = authHeader.split(" ")[1];
+  const token = authHeader;
 
   try {
     const decoded = jwt.verify(token, SECRET_KEY);

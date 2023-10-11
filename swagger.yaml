@@ -15,7 +15,7 @@ schemes:
 securityDefinitions:
   Authorization:
     type: apiKey
-    name: Bearer
+    name: Authorization
     in: header
     description: "JWT Bearer token for authentication"
 paths:
