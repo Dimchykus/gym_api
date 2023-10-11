@@ -14,10 +14,11 @@ schemes:
   - "http"
 components:
   securitySchemes:
-    bearerAuth:
-      type: http
+    Authorization:
+      type: https
       scheme: bearer
       bearerFormat: JWT
+      value: Bearer <JWT token here>
 paths:
   /login:
     post:
@@ -90,7 +91,7 @@ paths:
       summary: "Get My Trainers"
       operationId: "getMyTrainers"
       security:
-        - bearerAuth: []
+        - Authorization: []
       responses:
         200:
           description: "List of trainers associated with the user's sessions"
@@ -127,7 +128,7 @@ paths:
       description: "Retrieve the sessions booked by the authenticated user."
       operationId: "getMySessions"
       security:
-        - bearerAuth: []
+        - Authorization: []
       responses:
         200:
           description: "List of sessions booked by the user"
@@ -157,7 +158,7 @@ paths:
       description: "Book a session by providing the session ID."
       operationId: "bookSession"
       security:
-        - bearerAuth: []
+        - Authorization: []
       parameters:
         - name: "sessionId"
           in: "path"
@@ -198,7 +199,7 @@ paths:
       description: "Unbook a session by providing the session ID."
       operationId: "unbookSession"
       security:
-        - bearerAuth: []
+        - Authorization: []
       parameters:
         - name: "sessionId"
           in: "path"
@@ -239,7 +240,7 @@ paths:
       description: "Create a session if the authenticated user is a trainer."
       operationId: "createSession"
       security:
-        - bearerAuth: []
+        - Authorization: []
       parameters:
         - name: "SessionData"
           in: "body"
@@ -281,7 +282,7 @@ paths:
       description: "Update a session if the authenticated user is a trainer or manager."
       operationId: "updateSession"
       security:
-        - bearerAuth: []
+        - Authorization: []
       parameters:
         - name: "sessionId"
           in: "path"
@@ -328,7 +329,7 @@ paths:
       description: "Retrieve visitors if the authenticated user is a trainer or manager."
       operationId: "getVisitors"
       security:
-        - bearerAuth: []
+        - Authorization: []
       responses:
         200:
           description: "List of visitors associated with the user's sessions"
