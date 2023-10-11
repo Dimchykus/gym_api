@@ -9,7 +9,6 @@ info:
   version: "1.0.5"
   title: "Swagger Petstore"
 host: "89d0-213-109-80-222.ngrok-free.app"
-basePath: "/v2"
 schemes:
   - "https"
   - "http"
