@@ -1,5 +1,5 @@
 ---
-swagger: "2.0.0"
+swagger: "2.0"
 info:
   description:
     "This is a sample server Petstore server.  You can find out more about\
@@ -11,13 +11,12 @@ host: "89d0-213-109-80-222.ngrok-free.app"
 schemes:
   - "https"
   - "http"
-components:
-  securitySchemes:
-    Authorization:
-      type: https
-      scheme: bearer
-      bearerFormat: JWT
-      value: Bearer <JWT token here>
+securityDefinitions:
+  Authorization:
+    type: apiKey
+    name: Authorization
+    in: header
+    description: "JWT Bearer token for authentication"
 paths:
   /login:
     post:
