@@ -14,11 +14,10 @@ schemes:
   - "http"
 components:
   securitySchemes:
-    Authorization:
-      type: "http"
-      scheme: "bearer"
-      bearerFormat: "JWT"
-      value: "Bearer <JWT token here>"
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 paths:
   /login:
     post:
@@ -91,7 +90,7 @@ paths:
       summary: "Get My Trainers"
       operationId: "getMyTrainers"
       security:
-        - Authorization: []
+        - bearerAuth: []
       responses:
         200:
           description: "List of trainers associated with the user's sessions"
@@ -128,7 +127,7 @@ paths:
       description: "Retrieve the sessions booked by the authenticated user."
       operationId: "getMySessions"
       security:
-        - Authorization: []
+        - bearerAuth: []
       responses:
         200:
           description: "List of sessions booked by the user"
@@ -158,7 +157,7 @@ paths:
       description: "Book a session by providing the session ID."
       operationId: "bookSession"
       security:
-        - Authorization: []
+        - bearerAuth: []
       parameters:
         - name: "sessionId"
           in: "path"
@@ -199,7 +198,7 @@ paths:
       description: "Unbook a session by providing the session ID."
       operationId: "unbookSession"
       security:
-        - Authorization: []
+        - bearerAuth: []
       parameters:
         - name: "sessionId"
           in: "path"
@@ -240,7 +239,7 @@ paths:
       description: "Create a session if the authenticated user is a trainer."
       operationId: "createSession"
       security:
-        - Authorization: []
+        - bearerAuth: []
       parameters:
         - name: "SessionData"
           in: "body"
@@ -282,7 +281,7 @@ paths:
       description: "Update a session if the authenticated user is a trainer or manager."
       operationId: "updateSession"
       security:
-        - Authorization: []
+        - bearerAuth: []
       parameters:
         - name: "sessionId"
           in: "path"
@@ -329,7 +328,7 @@ paths:
       description: "Retrieve visitors if the authenticated user is a trainer or manager."
       operationId: "getVisitors"
       security:
-        - Authorization: []
+        - bearerAuth: []
       responses:
         200:
           description: "List of visitors associated with the user's sessions"
