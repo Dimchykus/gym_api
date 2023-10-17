@@ -228,7 +228,7 @@ router.post("/sessions", authenticateUser, async (req, res) => {
  *           minimum: 1
  *           description: The maximum number of visitors allowed for the session.
  */
-router.get("/sessions", authenticateUser, async (req, res) => {
+router.get("/mySessions", authenticateUser, async (req, res) => {
   // Check if the authenticated user is a trainer
   if (!req.user.isTrainerOrManager) {
     return res
@@ -241,6 +241,24 @@ router.get("/sessions", authenticateUser, async (req, res) => {
     const sessions = await Session.find({ trainer: req.user._id });
 
     // Return the sessions
+    res.json(sessions);
+  } catch (error) {
+    res.status(500).json({
+      message: "An error occurred while trying to get the sessions.",
+    });
+  }
+});
+
+router.get("/sessions", authenticateUser, async (req, res) => {
+  if (!req.user.isTrainerOrManager) {
+    return res
+      .status(403)
+      .json({ message: "Only trainers can view their sessions." });
+  }
+
+  try {
+    const sessions = await Session.find();
+
     res.json(sessions);
   } catch (error) {
     res.status(500).json({

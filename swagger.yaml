@@ -22,7 +22,7 @@ paths:
   /login:
     post:
       tags:
-        - "user"
+        - "Common"
       summary: "User Login"
       operationId: "userLogin"
       consumes:
@@ -231,7 +231,62 @@ paths:
             properties:
               message:
                 type: "string"
+  /mySessions:
+    get:
+      tags:
+        - "Trainer"
+      summary: "Get sessions created by the authenticated trainer or manager"
+      description: "Allows authenticated trainers and managers to retrieve sessions they have created."
+      operationId: "getMySessions"
+      responses:
+        200:
+          description: "Sessions retrieved successfully"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Session"
+        403:
+          description: "Forbidden"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
   /sessions:
+    get:
+      tags:
+        - "Visitor"
+      summary: "Get sessions (for trainers and managers)"
+      description: "Allows trainers and managers to retrieve a list of sessions."
+      operationId: "getSessions"
+      responses:
+        200:
+          description: "Sessions retrieved successfully"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/Session"
+        403:
+          description: "Forbidden"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
     post:
       tags:
         - "Trainer"
@@ -652,6 +707,17 @@ definitions:
     properties:
       _id:
         type: "string"
+  SessionUpdateData:
+    type: "object"
+    properties:
+      name:
+        type: "string"
+        description: "Updated session name"
+      maxVisitors:
+        type: "integer"
+        description: "Updated maximum number of visitors allowed in the session"
+    required:
+      - name
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"

@@ -29,20 +29,15 @@ function verifyToken(token) {
 function authenticateUser(req, res, next) {
   const authHeader = req.headers.authorization;
 
-  console.log("authHeader", authHeader);
-
   if (!authHeader) {
     return res
       .status(401)
       .json({ message: "Missing or invalid authorization header" });
   }
-
-  console.log("here authHeader", authHeader);
-
-  const token = authHeader;
-
   try {
-    const decoded = jwt.verify(token, SECRET_KEY);
+
+    const decoded = jwt.verify(authHeader, SECRET_KEY);
+
     req.user = decoded;
     next();
   } catch (error) {
