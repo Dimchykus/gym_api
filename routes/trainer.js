@@ -228,7 +228,7 @@ router.post("/sessions", authenticateUser, async (req, res) => {
  *           minimum: 1
  *           description: The maximum number of visitors allowed for the session.
  */
-router.get("/mySessions", authenticateUser, async (req, res) => {
+router.get("/trainer/mySessions", authenticateUser, async (req, res) => {
   // Check if the authenticated user is a trainer
   if (!req.user.isTrainerOrManager) {
     return res

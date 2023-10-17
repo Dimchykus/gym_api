@@ -231,7 +231,7 @@ paths:
             properties:
               message:
                 type: "string"
-  /mySessions:
+  /trainer/mySessions:
     get:
       tags:
         - "Trainer"
