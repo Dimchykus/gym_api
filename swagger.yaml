@@ -8,7 +8,7 @@ info:
     \ filters."
   title: "Swagger Gym Api"
   version: "1.0.0"
-host: "89d0-213-109-80-222.ngrok-free.app"
+host: "662f-213-109-80-222.ngrok-free.app"
 schemes:
   - "https"
   - "http"
@@ -320,6 +320,50 @@ paths:
             properties:
               message:
                 type: "string"
+  /trainer/register:
+    post:
+      tags:
+        - "Trainer"
+      summary: "Register a new trainer"
+      description: "Allows users to register as trainers."
+      operationId: "registerTrainer"
+      security:
+        - Authorization: []
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Trainer registration data"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: "string"
+              password:
+                type: "string"
+              name:
+                type: "string"
+              email:
+                type: "string"
+      responses:
+        200:
+          description: "Trainer registered successfully"
+          schema:
+            type: "object"
+            properties:
+              token:
+                type: "string"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
   /visitors:
     get:
       tags:
@@ -338,6 +382,208 @@ paths:
               $ref: "#/definitions/Visitor"
         403:
           description: "Forbidden"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /manager/register:
+    post:
+      tags:
+        - "Manager"
+      summary: "Register a new manager"
+      description: "Allows users to register as managers."
+      operationId: "registerManager"
+      security:
+        - Authorization: []
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "body"
+          in: "body"
+          description: "Manager registration data"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              username:
+                type: "string"
+              password:
+                type: "string"
+              name:
+                type: "string"
+              email:
+                type: "string"
+      responses:
+        200:
+          description: "Manager registered successfully"
+          schema:
+            type: "object"
+            properties:
+              token:
+                type: "string"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /review/{sessionId}:
+    post:
+      tags:
+        - "Session"
+      summary: "Leave a session review"
+      description: "Allows users to leave a review for a session."
+      operationId: "leaveSessionReview"
+      security:
+        - Authorization: []
+      parameters:
+        - name: "sessionId"
+          in: "path"
+          description: "ID of the session to review."
+          required: true
+          type: "string"
+        - name: "body"
+          in: "body"
+          description: "Review data"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              comment:
+                type: "string"
+              rating:
+                type: "integer"
+      responses:
+        200:
+          description: "Review submitted successfully"
+          schema:
+            $ref: "#/definitions/Review"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        404:
+          description: "Session not found"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /addVisitor/{visitorId}/{sessionId}:
+    post:
+      tags:
+        - "Session"
+      summary: "Add a visitor to a session"
+      description: "Allows trainers or managers to add visitors to sessions."
+      operationId: "addVisitorToSession"
+      security:
+        - Authorization: []
+      parameters:
+        - name: "visitorId"
+          in: "path"
+          description: "ID of the visitor to add."
+          required: true
+          type: "string"
+        - name: "sessionId"
+          in: "path"
+          description: "ID of the session to add the visitor to."
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Visitor added to session successfully"
+          schema:
+            $ref: "#/definitions/Session"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        403:
+          description: "Forbidden"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        404:
+          description: "Session not found"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        500:
+          description: "Internal Server Error"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+  /removeVisitor/{visitorId}/{sessionId}:
+    delete:
+      tags:
+        - "Session"
+      summary: "Remove a visitor from a session"
+      description: "Allows trainers or managers to remove visitors from sessions."
+      operationId: "removeVisitorFromSession"
+      security:
+        - Authorization: []
+      parameters:
+        - name: "visitorId"
+          in: "path"
+          description: "ID of the visitor to remove."
+          required: true
+          type: "string"
+        - name: "sessionId"
+          in: "path"
+          description: "ID of the session to remove the visitor from."
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "Visitor removed from session successfully"
+          schema:
+            $ref: "#/definitions/Session"
+        400:
+          description: "Bad Request"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        403:
+          description: "Forbidden"
+          schema:
+            type: "object"
+            properties:
+              message:
+                type: "string"
+        404:
+          description: "Session not found"
           schema:
             type: "object"
             properties:
@@ -381,6 +627,14 @@ definitions:
     properties:
       _id:
         type: "string"
+      sessionId:
+        type: "string"
+      visitors:
+        type: "array"
+        items:
+          type: "string"
+      maxVisitors:
+        type: "integer"
   CreateSessionData:
     type: "object"
     properties:

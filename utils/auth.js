@@ -37,6 +37,8 @@ function authenticateUser(req, res, next) {
       .json({ message: "Missing or invalid authorization header" });
   }
 
+  console.log("here authHeader", authHeader);
+
   const token = authHeader;
 
   try {
