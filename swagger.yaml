@@ -8,7 +8,7 @@ info:
     \ filters."
   title: "Swagger Gym Api"
   version: "1.0.0"
-host: "662f-213-109-80-222.ngrok-free.app"
+host: "ca05-213-109-80-222.ngrok-free.app"
 schemes:
   - "https"
   - "http"
