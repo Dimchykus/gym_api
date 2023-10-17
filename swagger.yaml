@@ -54,7 +54,7 @@ paths:
   /register:
     post:
       tags:
-        - "user"
+        - "Visitor"
       summary: "User Registration"
       operationId: "userRegistration"
       consumes:
@@ -86,7 +86,7 @@ paths:
   /myTrainers:
     get:
       tags:
-        - "user"
+        - "Visitor"
       summary: "Get My Trainers"
       operationId: "getMyTrainers"
       security:
@@ -122,7 +122,7 @@ paths:
   /mySessions:
     get:
       tags:
-        - "user"
+        - "Visitor"
       summary: "Get My Sessions"
       description: "Retrieve the sessions booked by the authenticated user."
       operationId: "getMySessions"
@@ -152,7 +152,7 @@ paths:
   /book/{sessionId}:
     post:
       tags:
-        - "user"
+        - "Visitor"
       summary: "Book a Session"
       description: "Book a session by providing the session ID."
       operationId: "bookSession"
@@ -193,7 +193,7 @@ paths:
   /unbook/{sessionId}:
     delete:
       tags:
-        - "user"
+        - "Visitor"
       summary: "Unbook a Session"
       description: "Unbook a session by providing the session ID."
       operationId: "unbookSession"
@@ -234,7 +234,7 @@ paths:
   /sessions:
     post:
       tags:
-        - "user"
+        - "Trainer"
       summary: "Create a Session"
       description: "Create a session if the authenticated user is a trainer."
       operationId: "createSession"
@@ -276,7 +276,7 @@ paths:
   /sessions/{sessionId}:
     put:
       tags:
-        - "user"
+        - "Trainer"
       summary: "Update a Session"
       description: "Update a session if the authenticated user is a trainer or manager."
       operationId: "updateSession"
@@ -367,7 +367,7 @@ paths:
   /visitors:
     get:
       tags:
-        - "user"
+        - "Trainer"
       summary: "Get Visitors"
       description: "Retrieve visitors if the authenticated user is a trainer or manager."
       operationId: "getVisitors"
@@ -441,7 +441,7 @@ paths:
   /review/{sessionId}:
     post:
       tags:
-        - "Session"
+        - "Visitor"
       summary: "Leave a session review"
       description: "Allows users to leave a review for a session."
       operationId: "leaveSessionReview"
@@ -493,7 +493,7 @@ paths:
   /addVisitor/{visitorId}/{sessionId}:
     post:
       tags:
-        - "Session"
+        - "Trainer"
       summary: "Add a visitor to a session"
       description: "Allows trainers or managers to add visitors to sessions."
       operationId: "addVisitorToSession"
@@ -546,7 +546,7 @@ paths:
   /removeVisitor/{visitorId}/{sessionId}:
     delete:
       tags:
-        - "Session"
+        - "Trainer"
       summary: "Remove a visitor from a session"
       description: "Allows trainers or managers to remove visitors from sessions."
       operationId: "removeVisitorFromSession"
