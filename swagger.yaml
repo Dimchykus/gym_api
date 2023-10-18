@@ -237,7 +237,7 @@ paths:
         - "Trainer"
       summary: "Get sessions created by the authenticated trainer or manager"
       description: "Allows authenticated trainers and managers to retrieve sessions they have created."
-      operationId: "getMySessions"
+      operationId: "getTainerSessions"
       responses:
         200:
           description: "Sessions retrieved successfully"
