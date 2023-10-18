@@ -238,6 +238,8 @@ paths:
       summary: "Get sessions created by the authenticated trainer or manager"
       description: "Allows authenticated trainers and managers to retrieve sessions they have created."
       operationId: "getTainerSessions"
+      security:
+        - Authorization: []
       responses:
         200:
           description: "Sessions retrieved successfully"
@@ -266,6 +268,8 @@ paths:
       summary: "Get sessions (for trainers and managers)"
       description: "Allows trainers and managers to retrieve a list of sessions."
       operationId: "getSessions"
+      security:
+        - Authorization: []
       responses:
         200:
           description: "Sessions retrieved successfully"

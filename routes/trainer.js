@@ -250,12 +250,7 @@ router.get("/trainer/mySessions", authenticateUser, async (req, res) => {
 });
 
 router.get("/sessions", authenticateUser, async (req, res) => {
-  if (!req.user.isTrainerOrManager) {
-    return res
-      .status(403)
-      .json({ message: "Only trainers can view their sessions." });
-  }
-
+  console.log("get sessions");
   try {
     const sessions = await Session.find();
 

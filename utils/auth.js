@@ -29,6 +29,8 @@ function verifyToken(token) {
 function authenticateUser(req, res, next) {
   const authHeader = req.headers.authorization;
 
+  console.log(req.headers);
+
   if (!authHeader) {
     return res
       .status(401)
